@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+@plugin "daisyui"{
+    themes:light --default;
+}
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #F9A51A;
+}
+@theme {
+   --font-bebas: "Bebas Neue", sans-serif;
+   --font-montserrat: "Montserrat", sans-serif;
+}
