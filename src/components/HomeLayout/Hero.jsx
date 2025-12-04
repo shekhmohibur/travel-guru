@@ -2,7 +2,7 @@ import SliderCard from '../SliderCard';
 import coxsBazar from "../../assets/Rectangle 1.png";
 import sajek from "../../assets/Sajek.png";
 import sreemongol from "../../assets/Sreemongol.png";
-import sundorbon from "../../assets/Sundorbon.png";
+import sundorbon from "../../assets/sundorbon.png";
 import SlideHeadline from '../SlideHeadline';
 import { useLoaderData } from 'react-router';
 const Hero = () => {
