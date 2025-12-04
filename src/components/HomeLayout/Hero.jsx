@@ -10,7 +10,6 @@ const Hero = () => {
     return (
         <div>
             <div>
-
             </div>
             <div className='w-[500px]'>
                 <SlideHeadline title={places.coxsBazar.title} description={places.coxsBazar.description} navigate={places.coxsBazar.id}/>
