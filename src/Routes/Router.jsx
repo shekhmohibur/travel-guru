@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router";
 import HomeLayout from "../layouts/HomeLayout";
 import Home from "../pages/Home";
+import Hero from "../components/HomeLayout/Hero";
+import Booking from "../components/Booking";
+import BookApplyCard from "../components/BookApplyCard";
 
 const Router = createBrowserRouter([
     {
@@ -8,8 +11,18 @@ const Router = createBrowserRouter([
         element:<HomeLayout/>,
         children:[
             {
+                path:'/home',
+                element:<Home/>,
+            },
+            {
                 path:'',
-                element:<Home/>
+                element:<Hero />,
+                loader:() => fetch('/places.json'),
+            },
+            {
+                path:'/place/:id',
+                element:<Booking/>,
+                loader:() => fetch('/places.json'),
             },
         ]
     },

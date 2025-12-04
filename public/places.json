@@ -1,0 +1,22 @@
+{
+  "coxsBazar": {
+    "id": "CoxsBazar",
+    "title": "Cox's Bazar",
+    "description": "Cox’s Bazar is known for the world’s longest natural sea beach, stretching over 120 km. It offers golden sand, powerful waves, and stunning sunsets. Popular spots include Himchari, Inani Beach, Laboni Point, and Maheshkhali Island, making it a lively and scenic coastal destination."
+  },
+  "sreemongol": {
+    "id": "Sreemongol",
+    "title": "Sreemongol",
+    "description": "Sreemongol is the tea capital of Bangladesh, full of rolling tea gardens, rainforests, and calm natural landscapes. Visitors love places like Lawachara National Park, Madhabpur Lake, and the villages of indigenous communities. The region is also famous for its unique Seven Layer Tea."
+  },
+  "sajek": {
+    "id": "Sajek",
+    "title": "Sajek",
+    "description": "Sajek is a stunning hill destination known for its cloud-covered views, cool breezes, and peaceful atmosphere. Located in the Chittagong Hill Tracts, it offers breathtaking sunrises, tribal cultural experiences, and scenic mountain trails surrounded by untouched nature."
+  },
+  "sundarban": {
+    "id": "Sundorbon",
+    "title": "Sundorbon",
+    "description": "The Sundarbans is the world’s largest mangrove forest and home to the Royal Bengal Tiger. Its vast network of rivers, canals, and dense greenery makes it perfect for wildlife photography and adventure. Visitors often explore Karamjol, Kotka, and Hiron Point to experience its rich biodiversity."
+  }
+}
