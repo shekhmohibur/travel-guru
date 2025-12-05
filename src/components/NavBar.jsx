@@ -1,13 +1,25 @@
 import { IoMenuOutline, IoSearch } from "react-icons/io5";
 import logo from "../assets/logo.png";
 import { Link, NavLink, useLocation, useParams } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import "animate.css";
 const NavBar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const {id:placeId} = useParams();
+    const [scrolled, setScrolled] = useState(false);
+    useEffect(() => {
+      const handleScroll = () => {
+        if(window.scrollY > 10){
+        setScrolled(true)
+      }else{
+        setScrolled(false)
+      }
+      }
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
   const navItems = [
     { label: "News", path: "/news" },
     { label: "Destination", path: "/destination" },
@@ -15,7 +27,8 @@ const NavBar = () => {
     { label: "Contact", path: "/contact" },
   ];
   return (
-    <div className="flex w-full justify-between items-center font-montserrat">
+    <div className={`${scrolled && 'bg-white/30 backdrop-blur-md shadow-md shadow-black/20 animate__animated animate__backInDown duration-150'} top-0 py-4`}>
+          <div className="flex justify-between items-center font-montserrat w-11/12 mx-auto">
       <div className="flex gap-4 relative">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -31,7 +44,7 @@ const NavBar = () => {
         />
         </Link>
         {menuOpen && (
-          <div className="absolute flex flex-col gap-3 lg:hidden top-20 animate__animated animate__backInLeft animateMenu bg-white/20 p-5 shadow-white shadow-[0_0_5px_rgba(0,0,0,0.3)]">
+          <div className="absolute flex flex-col gap-3 lg:hidden top-20 animate__animated animate__backInLeft animateMenu bg-black/80 p-5 shadow-white/20 shadow-[0_0_5px_rgba(0,0,0,0.3)]">
             {navItems?.map((item) => (
               <NavLink
                 key={item.path}
@@ -78,6 +91,7 @@ const NavBar = () => {
           Login
         </Link>
       </div>
+    </div>
     </div>
   );
 };

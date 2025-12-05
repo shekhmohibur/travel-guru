@@ -15,14 +15,14 @@ const Booking = () => {
   }, [places, placeId]);
 
   return (
-    <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-7 justify-between items-center gap-5 mt-20">
-      <div className="col-span-2 col-start-2">
+    <div className="flex w-full flex-col lg:flex-row justify-around items-center gap-10 lg:mt-20">
+      <div className="lg:max-w-[600px]">
         <SlideHeadline
           title={placeData?.title}
           description={placeData?.description}
         />
       </div>
-      <div className="flex flex-col gap-5 col-span-2 col-start-5">
+      <div className="flex flex-col gap-5 w-full lg:w-[600px]">
         <BookApplyCard place={placeData} title={placeData ? placeData?.title : ''}/>
       </div>
     </div>
