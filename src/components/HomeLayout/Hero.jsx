@@ -7,11 +7,27 @@ import SlideHeadline from "../SlideHeadline";
 import { useLoaderData } from "react-router";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
+
 const Hero = () => {
   const places = useLoaderData();
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const totalSlide = 4;
+
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
+  useEffect(() => {
+    const calcSlides = () => {
+      const w = window.innerWidth;
+      if (w < 768) setSlidesPerView(1); // mobile
+      else if (w < 1024) setSlidesPerView(2); // tablet
+      else setSlidesPerView(3); // desktop and up
+    };
+
+    calcSlides();
+    window.addEventListener("resize", calcSlides);
+    return () => window.removeEventListener("resize", calcSlides);
+  }, []);
   const prevSlide = () => {
     setCurrent((prev) => (prev - 1 + totalSlide) % totalSlide);
   };
@@ -28,12 +44,15 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [isPaused]);
 
+  const headlineTranslate = `translateX(-${current * 100}%)`;
+  const imageTranslate = `translateX(-${(current * 100) / slidesPerView}%)`;
+
   return (
-    <div className="w-full flex flex-col gap-5 lg:gap-20  lg:grid grid-cols-3 relative">
+    <div className="w-full flex flex-col gap-5 lg:gap-20 lg:grid grid-cols-3 relative">
       <div className="max-w-[550px] overflow-hidden">
         <div
-          className={`flex col-span-1 gap-8`}
-          style={{ transform: `translateX(-${current * 105}%)` }}
+          className={`flex col-span-1 gap-5 transition-transform duration-500`}
+          style={{ transform: headlineTranslate }}
         >
           <div className="w-full shrink-0 overflow-hidden">
             <SlideHeadline
@@ -65,7 +84,12 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-5 lg:absolute bottom-3/5 lg:-bottom-20 left-1/2" onMouseLeave={() => setIsPaused(false)} onMouseEnter={() => setIsPaused(true)}>
+
+      <div
+        className="flex gap-5 lg:absolute bottom-3/5 lg:-bottom-20 left-1/2"
+        onMouseLeave={() => setIsPaused(false)}
+        onMouseEnter={() => setIsPaused(true)}
+      >
         <button onClick={prevSlide} className="btn rounded-full w-12 h-12">
           <FaChevronLeft size={27} />
         </button>
@@ -73,24 +97,35 @@ const Hero = () => {
           <FaChevronRight size={27} />
         </button>
       </div>
-      <div className="overflow-hidden col-span-2" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+
+      <div
+        className="overflow-hidden col-span-2"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <div
-          className="flex gap-8 shrink-0 transition-transform duration-500"
-          style={{ transform: `translateX(-${current * 30}%)` }}
+          className={`flex gap-8 shrink-0 transition-transform duration-500`}
+          style={{
+            transform: imageTranslate,
+            // set width of the inner track so each child can be sized via flex-basis below
+            width: `${(totalSlide * 100) / slidesPerView}%`,
+          }}
         >
           {[
             { img: coxsBazar, title: "cox's bazar" },
             { img: sreemongol, title: "sreemongol" },
-            { img: sundorbon, title: "sundorbon" },
+            { img: sundorbon, title: "sundarbon" },
             { img: sajek, title: "sajek" },
           ].map((item, index) => (
             <div
               key={index}
               className={`p-2 rounded-xl transition-all duration-300 ${
-                current === index
-                  ? "scale-105 shadow-xl" // highlight
-                  : "opacity-70"
+                current === index ? "scale-105 shadow-xl" : "opacity-70"
               }`}
+              style={{
+                flex: `0 0 ${100 / slidesPerView}%`,
+                maxWidth: `${100 / slidesPerView}%`,
+              }}
             >
               <SliderCard
                 current={current}

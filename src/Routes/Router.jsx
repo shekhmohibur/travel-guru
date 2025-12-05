@@ -4,6 +4,9 @@ import Home from "../pages/Home";
 import Hero from "../components/HomeLayout/Hero";
 import Booking from "../components/Booking";
 import BookApplyCard from "../components/BookApplyCard";
+import AuthLayout from "../layouts/AuthLayout";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const Router = createBrowserRouter([
     {
@@ -28,15 +31,15 @@ const Router = createBrowserRouter([
     },
     {
         path:'/auth/',
-        element:<h1>AuthLayout</h1>,
+        element:<AuthLayout/>,
         children:[
             {
                 path:'/auth/login',
-                element:<h2>login</h2>,
+                element:<Login/>,
             },
             {
                 path:'/auth/register',
-                element:<h2>register</h2>,
+                element:<Register/>,
             },
         ]
     },

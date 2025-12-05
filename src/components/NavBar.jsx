@@ -56,7 +56,7 @@ const NavBar = () => {
                 {item.label}
               </NavLink>
             ))}
-            <label className="input md:hidden outline-none bg-transparent border-b border-white border-t-0 border-l-0 border-r-0 text-white placeholder:text-white lg:w-80">
+            <label className={`input md:hidden outline-none bg-transparent border-b border-white border-t-0 border-l-0 border-r-0 text-white placeholder:text-white lg:w-80`}>
               <IoSearch className="h-[1em] opacity-50" />
               <input type="search" placeholder="Search" />
             </label>
@@ -66,7 +66,7 @@ const NavBar = () => {
       <div className="flex gap-8 items-center">
         <div className="flex gap-8 items-center">
           {/* search input */}
-          <label className="hidden md:flex input outline-none bg-white/20 shadow-[0_0_5px_rgba(0,0,0,0.3)] shadow-white text-white placeholder:text-white text-lg lg:w-80">
+          <label className={`hidden ${location.pathname === '/auth/login' || location.pathname === '/auth/register' ? '' : 'md:flex'} input outline-none bg-white/20 shadow-[0_0_5px_rgba(0,0,0,0.3)] shadow-white text-white placeholder:text-white text-lg lg:w-80 `}>
             <IoSearch className="h-[1em] opacity-50" />
             <input type="search" placeholder="Search your Destination..." />
           </label>
