@@ -109,7 +109,7 @@ export default function Login({ onSwitch }) {
       </div>
 
       {/* OAuth Buttons */}
-      <div className="space-y-3">
+      <div className="space-y-3  flex justify-center items-center flex-col">
         <button className="btn btn-outline btn-wide rounded-full justify-start">
           <span className="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-sm">
             <FaFacebookF />
