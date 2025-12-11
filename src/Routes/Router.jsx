@@ -3,7 +3,6 @@ import HomeLayout from "../layouts/HomeLayout";
 import Home from "../pages/Home";
 import Hero from "../components/HomeLayout/Hero";
 import Booking from "../components/Booking";
-import BookApplyCard from "../components/BookApplyCard";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";

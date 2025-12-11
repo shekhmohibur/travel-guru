@@ -1,29 +1,9 @@
-import React, { useState } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
 
-export default function Register({ onSwitch }) {
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    identifier: "",
-    password: "",
-    confirm: "",
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  }
-
+export default function Register() {
   function handleSubmit(e) {
     e.preventDefault();
-    if (form.password !== form.confirm) {
-      alert("Passwords do not match!");
-      return;
-    }
-    console.log("Register Data:", form);
   }
 
   return (
@@ -41,8 +21,6 @@ export default function Register({ onSwitch }) {
               <input
                 type="text"
                 name="firstName"
-                value={form.firstName}
-                onChange={handleChange}
                 className="input input-bordered w-full"
                 required
               />
@@ -56,8 +34,6 @@ export default function Register({ onSwitch }) {
               <input
                 type="text"
                 name="lastName"
-                value={form.lastName}
-                onChange={handleChange}
                 className="input input-bordered w-full"
               />
             </div>
@@ -69,9 +45,7 @@ export default function Register({ onSwitch }) {
               </label>
               <input
                 type="text"
-                name="identifier"
-                value={form.identifier}
-                onChange={handleChange}
+                name="email"
                 className="input input-bordered w-full"
                 required
               />
@@ -85,8 +59,6 @@ export default function Register({ onSwitch }) {
               <input
                 type="password"
                 name="password"
-                value={form.password}
-                onChange={handleChange}
                 className="input input-bordered w-full"
                 required
               />
@@ -100,8 +72,6 @@ export default function Register({ onSwitch }) {
               <input
                 type="password"
                 name="confirm"
-                value={form.confirm}
-                onChange={handleChange}
                 className="input input-bordered w-full"
                 required
               />
@@ -115,13 +85,12 @@ export default function Register({ onSwitch }) {
             {/* Switch to login */}
             <p className="text-center text-sm mt-2">
               Already have an account?{" "}
-              <Link
+              <button type="submit"
               to={'/auth/login'}
                 className="link"
-                onClick={() => onSwitch("login")}
               >
                 Login
-              </Link>
+              </button>
             </p>
           </form>
         </div>
