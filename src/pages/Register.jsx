@@ -1,10 +1,37 @@
+import { useContext, useState } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../provider/AuthProvider";
 
 export default function Register() {
+  const [missMatchPass, setMissMatchPass] = useState(false);
+  const [noSpecialChar, setNoSpecialChar] = useState(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const emailRegex = '@gmail.com';
+  const {createUser} = useContext(AuthContext);
   function handleSubmit(e) {
     e.preventDefault();
+    const form = e.target;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.confirm.value;
+    if (password !== confirm) {
+      setMissMatchPass(true)
+      return;
+    }
+    if(!/[!@#$%^&*(),.?":{}|<>]/.test(password)){
+      setNoSpecialChar(true);
+      return;
+    }
+    if(!email.endsWith(emailRegex)){
+      setInvalidEmail(true);
+      return
   }
+  console.log(firstName, lastName, email, password, confirm);
+  }
+  
 
   return (
     <div className="max-w-md mx-auto">
@@ -42,6 +69,9 @@ export default function Register() {
             <div>
               <label className="label">
                 <span className="label-text">Username or Email</span>
+                {
+              invalidEmail ? <p className="text-red-500 text-sm text-center">Invalid Email</p> : <p></p>
+            }
               </label>
               <input
                 type="text"
@@ -67,7 +97,13 @@ export default function Register() {
             {/* Confirm Password */}
             <div>
               <label className="label">
-                <span className="label-text">Confirm Password</span>
+                <span className="label-text">Confirm Password</span>{
+              missMatchPass && <p className="text-red-500 text-sm text-center">did not matched</p>
+            }
+                {
+              !missMatchPass && noSpecialChar && <p className="text-red-500 text-sm text-center">must contain a special character</p>
+            }
+                        
               </label>
               <input
                 type="password"
@@ -75,8 +111,7 @@ export default function Register() {
                 className="input input-bordered w-full"
                 required
               />
-            </div>
-
+            </div>            
             {/* Button */}
             <button type="submit" className="btn btn-warning w-full">
               Create an account
@@ -85,10 +120,7 @@ export default function Register() {
             {/* Switch to login */}
             <p className="text-center text-sm mt-2">
               Already have an account?{" "}
-              <button type="submit"
-              to={'/auth/login'}
-                className="link"
-              >
+              <button type="submit" to={"/auth/login"} className="link">
                 Login
               </button>
             </p>
