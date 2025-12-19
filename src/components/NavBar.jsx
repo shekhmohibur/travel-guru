@@ -10,7 +10,7 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { id: placeId } = useParams();
   const [scrolled, setScrolled] = useState(false);
-  const { user } = use(AuthContext);
+  const { user, logOut } = use(AuthContext);
   console.log(location)
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +31,11 @@ const NavBar = () => {
   ];
   const handleLogOut = () => {
     // logout functionality here
+    logOut().then(() => {
+      alert("Logged out successfully");
+    }).catch((error) => {
+      alert(error);
+    });
   }
   return (
     <div
@@ -117,7 +122,7 @@ const NavBar = () => {
           </div>
           <div className="group">
             {user ? (
-              <p className={`${location.pathname === "/auth/profile" ? "text-black" : "text-white"}`}>UserOnline</p>
+              <p className={`${location.pathname === "/profile" || location.pathname === "/auth/login" || location.pathname === "/auth/register" ? "text-black" : "text-white"}`}>UserOnline</p>
             ) : (
               <Link
                 to={"/auth/login"}
@@ -129,7 +134,7 @@ const NavBar = () => {
             {
               user ?
               <div className="absolute hidden group-hover:flex bg-white text-black p-3 rounded-md flex-col">
-                <Link to="/auth/profile" className="">Profile</Link>
+                <Link to="/profile" className="">Profile</Link>
                 <button className='py-2 cursor-pointer' onClick={handleLogOut}>Logout</button>
               </div>
               :

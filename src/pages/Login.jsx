@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import { useContext } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
+import { AuthContext } from "../provider/AuthProvider";
 
-export default function Login({ onSwitch }) {
-  const [form, setForm] = useState({
-    identifier: "",
-    password: "",
-    remember: false,
-  });
-
-  function handleChange(e) {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  }
-
-  function handleSubmit(e) {
+export default function Login() {
+  const { signIn, setUser } = useContext(AuthContext);
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login Data:", form);
-  }
+    const form = e.target;
+    const identifier = form.identifier.value;
+    const password = form.password.value;
+  
+    signIn(identifier, password)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);       
+      })
+      .catch((error) => {
+        console.log("Error during sign-in:", error);
+      });}
 
   return (
     <div className="max-w-md mx-auto">
@@ -38,8 +36,6 @@ export default function Login({ onSwitch }) {
               <input
                 type="text"
                 name="identifier"
-                value={form.identifier}
-                onChange={handleChange}
                 className="input input-bordered w-full"
                 required
               />
@@ -53,8 +49,6 @@ export default function Login({ onSwitch }) {
               <input
                 type="password"
                 name="password"
-                value={form.password}
-                onChange={handleChange}
                 className="input input-bordered w-full"
                 required
               />
@@ -63,20 +57,11 @@ export default function Login({ onSwitch }) {
             {/* Remember + Forgot Password */}
             <div className="flex items-center justify-between">
               <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  name="remember"
-                  checked={form.remember}
-                  onChange={handleChange}
-                  className="checkbox"
-                />
+                <input type="checkbox" name="remember" className="checkbox" />
                 <span className="text-sm">Remember Me</span>
               </label>
 
-              <button
-                type="button"
-                className="text-sm link link-hover"
-              >
+              <button type="button" className="text-sm link link-hover">
                 Forgot Password
               </button>
             </div>
@@ -89,11 +74,7 @@ export default function Login({ onSwitch }) {
             {/* Switch to Register */}
             <p className="text-center text-sm mt-2">
               Don’t have an account?{" "}
-              <Link
-                to={'/auth/register'}
-                className="link"
-                onClick={() => onSwitch("register")}
-              >
+              <Link to={"/auth/register"} className="link">
                 Create an account
               </Link>
             </p>

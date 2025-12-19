@@ -1,10 +1,13 @@
 import { use } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import NavBar from "../components/NavBar";
 
 export default function Profile() {
     const { user } = use(AuthContext);
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div>
+      <NavBar/>
+          <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       {/* Profile Card */}
       <div className="w-full max-w-3xl bg-white border rounded-lg shadow-sm p-6 md:p-8">
         {/* Header */}
@@ -48,6 +51,8 @@ export default function Profile() {
         </div>
       </div>
     </div>
+    </div>
+
   );
 }
 
