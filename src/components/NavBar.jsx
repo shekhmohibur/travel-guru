@@ -11,6 +11,7 @@ const NavBar = () => {
   const { id: placeId } = useParams();
   const [scrolled, setScrolled] = useState(false);
   const { user } = use(AuthContext);
+  console.log(location)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -28,6 +29,9 @@ const NavBar = () => {
     { label: "Blog", path: "/blog" },
     { label: "Contact", path: "/contact" },
   ];
+  const handleLogOut = () => {
+    // logout functionality here
+  }
   return (
     <div
       className={`${
@@ -111,15 +115,27 @@ const NavBar = () => {
               ))}
             </div>
           </div>
-          {
-            user ? <p className={'text-white'}>{user.name}</p>  : <Link
-            to={"/auth/login"}
-            className="btn bg-primary shadow-none border-none md:px-7 md:text-lg md:py-6"
-          >
-            Login
-          </Link>
-          }
-          
+          <div className="group">
+            {user ? (
+              <p className={`${location.pathname === "/auth/profile" ? "text-black" : "text-white"}`}>UserOnline</p>
+            ) : (
+              <Link
+                to={"/auth/login"}
+                className="btn bg-primary shadow-none border-none md:px-7 md:text-lg md:py-6"
+              >
+                Login
+              </Link>
+            )}
+            {
+              user ?
+              <div className="absolute hidden group-hover:flex bg-white text-black p-3 rounded-md flex-col">
+                <Link to="/auth/profile" className="">Profile</Link>
+                <button className='py-2 cursor-pointer' onClick={handleLogOut}>Logout</button>
+              </div>
+              :
+              ""
+            }
+          </div>
         </div>
       </div>
     </div>

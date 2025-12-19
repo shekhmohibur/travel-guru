@@ -8,7 +8,7 @@ export default function Register() {
   const [noSpecialChar, setNoSpecialChar] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const emailRegex = '@gmail.com';
-  const {createUser} = useContext(AuthContext);
+  const {createUser, setUser} = useContext(AuthContext);
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -29,7 +29,18 @@ export default function Register() {
       setInvalidEmail(true);
       return
   }
-  console.log(firstName, lastName, email, password, confirm);
+  createUser(email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    setUser(user);
+    
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode, errorMessage)
+  });
   }
   
 

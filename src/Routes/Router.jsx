@@ -6,6 +6,7 @@ import Booking from "../components/Booking";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Profile from "../pages/Profile";
 
 const Router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const Router = createBrowserRouter([
                 path:'/auth/register',
                 element:<Register/>,
             },
+            {
+                path:'/auth/profile',
+                element: <Profile/>,
+            }
         ]
     },
     {
