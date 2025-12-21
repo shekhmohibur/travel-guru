@@ -5,6 +5,8 @@ import { Link } from "react-router";
 
 export default function Profile() {
     const { user, logOut } = use(AuthContext);
+    console.log(user);
+    
     const handleLogOut = () => {
     // logout functionality here
     logOut().then(() => {
@@ -23,7 +25,7 @@ export default function Profile() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="flex items-center gap-4">
             <img
-              src="https://i.pravatar.cc/150"
+              src={user.photoURL}
               alt="Profile"
               className="w-20 h-20 rounded-full border"
             />

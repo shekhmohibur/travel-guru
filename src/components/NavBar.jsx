@@ -11,7 +11,6 @@ const NavBar = () => {
   const { id: placeId } = useParams();
   const [scrolled, setScrolled] = useState(false);
   const { user, logOut } = use(AuthContext);
-  console.log(location)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
