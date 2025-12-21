@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
 export default function Login() {
   const { signIn, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -15,7 +17,8 @@ export default function Login() {
     signIn(identifier, password)
       .then((result) => {
         const user = result.user;
-        setUser(user);       
+        setUser(user);
+        navigate(`${location.state ? location.state : '/profile'}`)       
       })
       .catch((error) => {
         console.log("Error during sign-in:", error);

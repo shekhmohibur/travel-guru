@@ -1,9 +1,18 @@
 import { use } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import NavBar from "../components/NavBar";
+import { Link } from "react-router";
 
 export default function Profile() {
-    const { user } = use(AuthContext);
+    const { user, logOut } = use(AuthContext);
+    const handleLogOut = () => {
+    // logout functionality here
+    logOut().then(() => {
+      alert("Logged out successfully");
+    }).catch((error) => {
+      alert(error);
+    });
+  }
   return (
     <div>
       <NavBar/>
@@ -24,9 +33,9 @@ export default function Profile() {
             </div>
           </div>
 
-          <button className="bg-orange-400 hover:bg-orange-500 text-white px-6 py-2 rounded transition">
+          <Link to="/update-profile" className="bg-orange-400 hover:bg-orange-500 text-white px-6 py-2 rounded transition">
             Edit Profile
-          </button>
+          </Link>
         </div>
 
         {/* Divider */}
@@ -45,7 +54,7 @@ export default function Profile() {
           <button className="w-full sm:w-auto border border-orange-400 text-orange-400 px-6 py-2 rounded hover:bg-orange-50 transition">
             Change Password
           </button>
-          <button className="w-full sm:w-auto border px-6 py-2 rounded hover:bg-gray-100 transition">
+          <button onClick={handleLogOut} className="w-full sm:w-auto border px-6 py-2 rounded hover:bg-gray-100 transition cursor-pointer">
             Logout
           </button>
         </div>

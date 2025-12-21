@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import PrivateRoute from "../provider/PrivateRoute";
+import UpdateProfile from "../pages/UpdateProfile";
 
 const Router = createBrowserRouter([
     {
@@ -25,7 +26,7 @@ const Router = createBrowserRouter([
             },
             {
                 path:'/place/:id',
-                element:<Booking/>,
+                element:<PrivateRoute><Booking/></PrivateRoute>,
                 loader:() => fetch('/places.json'),
             },
         ]
@@ -47,6 +48,10 @@ const Router = createBrowserRouter([
     {
         path:'/profile',
         element: <PrivateRoute><Profile/></PrivateRoute>
+    },
+    {
+        path:'/update-profile',
+        element:<PrivateRoute><UpdateProfile/></PrivateRoute>,
     },
     {
         path:'/*',
