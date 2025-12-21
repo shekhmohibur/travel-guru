@@ -4,11 +4,16 @@ import BookingTime from "./BookingTime";
 const originPromise = fetch("/origin.json").then((res) => res.json());
 const BookApplyCard = ({ title }) => {
   const origin = use(originPromise);
+  const handleBooking = (e) => {
+    e.preventDefault();
+    alert("Thank you for booking!");
+  }
   return (
-    <div className="bg-white p-5 flex flex-col gap-4 font-montserrat rounded-md">
+    <div>
+      <form onSubmit={handleBooking} className="bg-white p-5 flex flex-col gap-4 font-montserrat rounded-md">
       <div className="flex flex-col gap-1">
         <label className="text-black/50 font-semibold font-montserrat text-lg">
-          Orgin
+          Origin
         </label>
         <OriginSelector origin={origin} />
       </div>
@@ -26,8 +31,10 @@ const BookApplyCard = ({ title }) => {
       <div>
         <BookingTime/>
       </div>
-      <button className="bg-primary py-4 text-lg font-semibold rounded-md cursor-pointer">Start Booking</button>
+      <button type="submit" className="bg-primary py-4 text-lg font-semibold rounded-md cursor-pointer">Start Booking</button>
+    </form>
     </div>
+    
   );
 };
 

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, Navigate, useNavigate } from "react-router";
+import NavBar from "../components/NavBar";
 
 export default function UpdateProfile() {
   const { user, updateUserProfile } = useContext(AuthContext);
@@ -25,7 +26,9 @@ export default function UpdateProfile() {
     });
   };
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div>
+      <NavBar/>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       {/* Card */}
       <div className="w-full max-w-3xl bg-white border rounded-lg shadow-sm p-6 md:p-8">
         {/* Header */}
@@ -68,5 +71,7 @@ export default function UpdateProfile() {
         </form>
       </div>
     </div>
+    </div>
+    
   );
 }

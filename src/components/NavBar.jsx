@@ -8,6 +8,7 @@ import { AuthContext } from "../provider/AuthProvider";
 const NavBar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [nameClicked, setNameClicked] = useState(false);
   const { id: placeId } = useParams();
   const [scrolled, setScrolled] = useState(false);
   const { user, logOut } = use(AuthContext);
@@ -119,9 +120,9 @@ const NavBar = () => {
               ))}
             </div>
           </div>
-          <div className="group">
+          <div onClick={()=>{setNameClicked(!nameClicked)}} className="group">
             {user ? (
-              <p className={`${location.pathname === "/profile" || location.pathname === "/auth/login" || location.pathname === "/auth/register" ? "text-black" : "text-white"}`}>UserOnline</p>
+              <p className={`${location.pathname === "/profile" || location.pathname === "/auth/login" || location.pathname === "/auth/register" || location.pathname === "/update-profile" ? "text-black" : "text-white"}`}>{user ? user.displayName : "John Doe"}</p>
             ) : (
               <Link
                 to={"/auth/login"}
@@ -132,7 +133,7 @@ const NavBar = () => {
             )}
             {
               user ?
-              <div className="absolute hidden group-hover:flex bg-white text-black p-3 rounded-md flex-col">
+              <div className={`absolute group-hover:flex bg-white text-black p-3 rounded-md flex-col ${nameClicked ? "flex" : "hidden"}`}>
                 <Link to="/profile" className="">Profile</Link>
                 <button className='py-2 cursor-pointer' onClick={handleLogOut}>Logout</button>
               </div>
