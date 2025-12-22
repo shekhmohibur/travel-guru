@@ -5,7 +5,6 @@ import NavBar from "../components/NavBar";
 
 export default function UpdateProfile() {
   const { user, updateUserProfile } = useContext(AuthContext);
-  console.log(user);
   
   const navigate = useNavigate();
   const handleUpdateProfile = (e) => {

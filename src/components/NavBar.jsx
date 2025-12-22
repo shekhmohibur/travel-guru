@@ -122,7 +122,7 @@ const NavBar = () => {
           </div>
           <div onClick={()=>{setNameClicked(!nameClicked)}} className="group">
             {user ? (
-              <p className={`${location.pathname === "/profile" || location.pathname === "/auth/login" || location.pathname === "/auth/register" || location.pathname === "/update-profile" ? "text-black" : "text-white"}`}>{user.displayName === '' ? "User" : user.displayName}</p>
+              <p className={`${location.pathname === "/profile" || location.pathname === "/auth/login" || location.pathname === "/auth/register" || location.pathname === "/update-profile" ? "text-black" : "text-white"}`}>{user.displayName === null ? "USER" : user.displayName}</p>
             ) : (
               <Link
                 to={"/auth/login"}

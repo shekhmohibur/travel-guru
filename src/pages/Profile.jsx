@@ -5,7 +5,6 @@ import { Link } from "react-router";
 
 export default function Profile() {
     const { user, logOut } = use(AuthContext);
-    console.log(user);
     
     const handleLogOut = () => {
     // logout functionality here
